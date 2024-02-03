@@ -23,14 +23,14 @@ export default function RootLayout({
   const headerList = headers();
   const pathname = headerList.get("x-path") || "";
   console.log(pathname);
-  const SIDEBAR_PATHS = [ROUTES.SIGN_IN, ROUTES.SIGN_UP];
+  const SIDEBAR_PATHS = [ROUTES.SIGN_IN, ROUTES.SIGN_UP, '/test'];
   const showSidebar = !SIDEBAR_PATHS.some((route) => pathname === route);
   
 
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="h-full w-full bg-black">
-        <main className="h-screen w-full bg-black">
+        <main className={`h-screen w-full ${showSidebar && 'bg-black'} `}>
         {showSidebar ? <CoursesSidebar /> : null}
           {children}
           {showSidebar ? <NotesEditor /> : null}
