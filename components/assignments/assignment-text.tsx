@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/react-tooltip";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ChatbotContainer from "../chatbot/chatbot-container";
 
 
 export default function AssignmentText() {
@@ -61,6 +62,8 @@ export default function AssignmentText() {
       <div className="flex-grow pt-[10px] space-y-[25px]">
         <p className="text-xl text-medium">whats good</p>
       </div>
+
+      <ChatbotContainer />
 
       {/* User Input Bar */}
       <div style={{ boxShadow: '0 0 0 1px' }} className="h-[50px] rounded-[10px]">
