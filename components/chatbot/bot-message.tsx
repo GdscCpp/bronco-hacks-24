@@ -4,7 +4,7 @@ interface botMessageProps {
   message: string;
 }
 
-const BotMessage: React.FC<botMessageProps> = ({ message }) => {
+export default function BotMessage({ message }: botMessageProps) {
   return (
     <div className="flex justify-start">
       {/* User Message Container */}
@@ -15,5 +15,3 @@ const BotMessage: React.FC<botMessageProps> = ({ message }) => {
     </div>
   );
 };
-
-export default BotMessage;
