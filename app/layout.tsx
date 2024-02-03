@@ -1,7 +1,10 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import CoursesSidebar from "@/components/courses-sidebar";
-import AssignmentText from "@/components/assignments/assignment-text";
+
+import NotesEditor from "@/components/editor";
+import { headers } from "next/headers";
+import { ROUTES } from "@/config/routes";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,11 +21,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headerList = headers();
+  const pathname = headerList.get("x-path") || "";
+  console.log(pathname);
+  const SIDEBAR_PATHS = [
+    ROUTES.SIGN_IN,
+    ROUTES.SIGN_UP,
+    "/annoucement-placeholder",
+    "/test"]
+  const showSidebar = !SIDEBAR_PATHS.some((route) => pathname === route);
+  
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="flex h-screen w-full bg-black p-4">
-          <CoursesSidebar />
-          {children}
+      <body className="h-full w-full bg-black">
+        <main className={`h-screen w-full ${showSidebar && "bg-black"} `}>
+          <div className="inline-flex">
+            {showSidebar ? <CoursesSidebar /> : null}
+            {children}
+          </div>
+
+          {showSidebar ? <NotesEditor /> : null}
+        </main>
       </body>
     </html>
   );
