@@ -27,14 +27,14 @@ export default function RootLayout({
     ROUTES.SIGN_IN,
     ROUTES.SIGN_UP,
     "/annoucement-placeholder",
-  ];
+    "/test"]
   const showSidebar = !SIDEBAR_PATHS.some((route) => pathname === route);
   
 
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="h-full w-full bg-black">
-        <main className="h-screen w-full bg-black">
+        <main className={`h-screen w-full ${showSidebar && 'bg-black'} `}>
         {showSidebar ? <CoursesSidebar /> : null}
           {children}
           {showSidebar ? <NotesEditor /> : null}
