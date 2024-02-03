@@ -9,23 +9,64 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      annoucements: {
+        Row: {
+          content: string | null
+          courseId: number | null
+          created_at: string
+          id: number
+          posterId: number | null
+          replies: Json | null
+        }
+        Insert: {
+          content?: string | null
+          courseId?: number | null
+          created_at?: string
+          id?: number
+          posterId?: number | null
+          replies?: Json | null
+        }
+        Update: {
+          content?: string | null
+          courseId?: number | null
+          created_at?: string
+          id?: number
+          posterId?: number | null
+          replies?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "annoucements_courseId_fkey"
+            columns: ["courseId"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       assignments: {
         Row: {
+          course_id: number | null
           created_at: string
+          due_at: string | null
           id: number
           name: string | null
           questions: Json | null
           value: number | null
         }
         Insert: {
+          course_id?: number | null
           created_at?: string
+          due_at?: string | null
           id?: number
           name?: string | null
           questions?: Json | null
           value?: number | null
         }
         Update: {
+          course_id?: number | null
           created_at?: string
+          due_at?: string | null
           id?: number
           name?: string | null
           questions?: Json | null
@@ -125,6 +166,7 @@ export interface Database {
           id: number
           last_name: string | null
           note_ids: number[] | null
+          profilePicture: string | null
           schedule_id: number | null
           type: string | null
           uuid: string
@@ -136,6 +178,7 @@ export interface Database {
           id?: number
           last_name?: string | null
           note_ids?: number[] | null
+          profilePicture?: string | null
           schedule_id?: number | null
           type?: string | null
           uuid: string
@@ -147,6 +190,7 @@ export interface Database {
           id?: number
           last_name?: string | null
           note_ids?: number[] | null
+          profilePicture?: string | null
           schedule_id?: number | null
           type?: string | null
           uuid?: string

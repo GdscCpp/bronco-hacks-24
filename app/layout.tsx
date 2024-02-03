@@ -23,7 +23,11 @@ export default function RootLayout({
   const headerList = headers();
   const pathname = headerList.get("x-path") || "";
   console.log(pathname);
-  const SIDEBAR_PATHS = [ROUTES.SIGN_IN, ROUTES.SIGN_UP];
+  const SIDEBAR_PATHS = [
+    ROUTES.SIGN_IN,
+    ROUTES.SIGN_UP,
+    "/annoucement-placeholder",
+  ];
   const showSidebar = !SIDEBAR_PATHS.some((route) => pathname === route);
   
 
