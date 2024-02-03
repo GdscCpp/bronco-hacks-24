@@ -6,6 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Course, Assignment } from "@/supabase/helper";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import AssignmentText from "@/components/assignments/assignment-text";
 
 export default function CoursePage({ params }: { params: { id: string } }) {
 
@@ -75,9 +76,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
 
       </div>
 
-      <div className="flex-1 bg-primary-900 p-[25px] ml-[15px] rounded-xl">
-  
-      </div>
+      <AssignmentText />
 
     </>
   );

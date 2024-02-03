@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import CoursesSidebar from "@/components/courses-sidebar";
+import AssignmentText from "@/components/assignments/assignment-text";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
