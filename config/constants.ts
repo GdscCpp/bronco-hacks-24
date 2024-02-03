@@ -1,1 +1,1 @@
-export const BASE_URL = process.env.VERCEL_URL?.substring(0, process.env.VERCEL_URL.length) || "http://localhost:3000";
+export const BASE_URL = `https://${process.env.VERCEL_URL}` || "http://localhost:3000";
