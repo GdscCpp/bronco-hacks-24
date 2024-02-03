@@ -22,35 +22,59 @@ export default function AssignmentBot() {
   });
 
   const handleClick = async () => {
-    setMessages([...messages, { role: "user", content: input }]);
+    const tempInput = input;
+    setInput("");
+    setMessages([...messages, { role: "user", content: tempInput }]);
     const result = await openai.chat.completions.create({
       model: "gpt-4",
-      messages: messages,
+      messages: [...messages, { role: "user", content: tempInput }],
     });
 
     setMessages([
       ...messages,
-      { role: "user", content: input },
+      { role: "user", content: tempInput },
       { role: "assistant", content: result.choices[0].message.content },
     ]);
-    setInput("");
   };
 
   return (
-    <div className="bg-blue-500">
-      <h1>Assignment Bot</h1>
-      <div className={"bg-blue-500"}>
-        {messages.map((message) => (
-          <div>{message.content || ""}</div>
-        ))}
+    <div className="bg-primary-900 h-full w-full">
+      <div className="w-full">
+        {messages.map((message) =>
+          message.role === "user" ? (
+            <div className="inline-flex w-full">
+              <div className="w-3/4"></div>
+              <div className="w-1/4 inline-flex">
+                <div className="w-full"></div>
+                <div className="bg-primary-400 text-white rounded-xl p-2 w-fit whitespace-nowrap">
+                  <p>{message.content as string}</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="text-white rounded-xl w-1/2">
+                <div className="bg-secondary-500 w-fit rounded-xl p-2">
+                  <p className="w-fit">{message.content as string}</p>
+                </div>
+              </div>
+            </>
+          )
+        )}
       </div>
-      <input onChange={(e) => setInput(e.target.value)} />
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleClick}
-      >
-        Test
-      </button>
+      <div className="inline-flex w-full rounded-xl bg-primary-900 border-primary-400 border-2 fixed bottom-0">
+        <input
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
+          className="w-full bg-primary-900 text-white"
+        />
+        <button
+          className="bg-secondary-500 border-none text-white font-bold py-2 px-4"
+          onClick={handleClick}
+        >
+          Test
+        </button>
+      </div>
     </div>
   );
 }
