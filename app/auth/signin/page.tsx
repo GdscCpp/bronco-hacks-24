@@ -1,23 +1,17 @@
 "use client";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Form, FormProvider, useForm } from "react-hook-form";
+
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
-import { ROUTES } from "@/utils/routes";
+import { useRouter } from "next/navigation";
 import FormInput from "@/components/input/form-input";
+import { ROUTES } from "@/config/routes";
+import GoogleSignInButton from "@/components/button/g-signin";
 
 const signInSchema = z.object({
   email: z.string().email(),
@@ -74,6 +68,7 @@ export default function SignInPage() {
               </Button>
             </form>
           </FormProvider>
+          <GoogleSignInButton />
           {submissionError && (
             <div className="mt-2 text-red-500">{submissionError}</div>
           )}
