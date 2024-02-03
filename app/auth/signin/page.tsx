@@ -47,32 +47,47 @@ export default function SignInPage() {
 
   return (
     <>
-      <Card className={"w-1/2"}>
-        <CardHeader>Sign In</CardHeader>
-        <CardContent>
-          <FormProvider {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormInput
-                name="email"
-                label="Email"
-                placeholder="Enter your email"
-              />
-              <FormInput
-                name="password"
-                label="Password"
-                placeholder="Enter your password"
-              />
+      <Card className="flex overflow-hidden out bg-white">
+        <div className="w-1/2">
+          <img
+            src="/signup.png"
+            alt="background"
+            className={"object-cover rounded-r-none rounded-xl"}
+          />
+        </div>
+        <div className="w-1/2 bg-white">
+          <CardHeader>
+            <h1 className={"text-5xl text-secondary-500"}>ClassHub</h1>
+            <h2 className={"text-2xl text-black pt-5"}>
+              Nice to see you again
+            </h2>
+          </CardHeader>
+          <CardContent className="text-black">
+            <FormProvider {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormInput
+                  name="email"
+                  label="Email"
+                  placeholder="Enter your email"
+                  className="bg-white"
+                />
+                <FormInput
+                  name="password"
+                  label="Password"
+                  placeholder="Enter your password"
+                />
 
-              <Button className="mt-2" type="submit">
-                Sign In
-              </Button>
-            </form>
-          </FormProvider>
-          <GoogleSignInButton />
-          {submissionError && (
-            <div className="mt-2 text-red-500">{submissionError}</div>
-          )}
-        </CardContent>
+                <Button className="mt-2" type="submit">
+                  Sign in
+                </Button>
+              </form>
+            </FormProvider>
+            <GoogleSignInButton isSignUp={false} />
+            {submissionError && (
+              <div className="mt-2 text-red-500">{submissionError}</div>
+            )}
+          </CardContent>
+        </div>
       </Card>
     </>
   );
