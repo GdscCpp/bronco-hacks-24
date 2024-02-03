@@ -11,6 +11,8 @@ import {
 } from "@radix-ui/react-tooltip";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 export default function CoursesSidebar() {
   const supabase = createClient();
@@ -49,7 +51,14 @@ export default function CoursesSidebar() {
   }, []);
 
   return (
-    <div className="w-fit flex h-full bg-primary-900 rounded-lg p-4 m-4">
+    <div className="w-fit flex flex-col h-full bg-primary-900 rounded-xl p-4">
+      
+      <div className="bg-secondary-500 w-[80px] h-[80px] p-5 rounded-xl text-white mb-[15px] text-2xl flex justify-center items-center" onClick={() => router.push('/courses')}>
+        <FontAwesomeIcon icon={faHouse}></FontAwesomeIcon>
+      </div>
+
+      <hr className="mb-[15px]"></hr>
+
       {courses.map((course) => {
         return (
           <>
@@ -57,10 +66,11 @@ export default function CoursesSidebar() {
               <Tooltip>
                 <TooltipTrigger
                   className={
-                    "bg-primary-400 w-fit h-fit p-5 rounded-xl text-white"
+                    "bg-primary-400 w-[80px] h-[80px] p-5 rounded-xl text-white mb-[15px]"
                   }
+                  onClick={() => router.push(`/courses/${course.id}`)}
                 >
-                  {course.number}
+                  {course.number != null ? course.number.substring(0, 4) : "?"}
                 </TooltipTrigger>
                 <TooltipContent className={"text-white"}>{course.title}</TooltipContent>
               </Tooltip>
