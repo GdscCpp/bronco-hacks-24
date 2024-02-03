@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import CoursesSidebar from "@/components/courses-sidebar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,8 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="h-full w-full">
-        <main className="h-screen w-full">
+      <body className="h-full w-full bg-black">
+        <main className="h-screen w-full bg-black">
+          <CoursesSidebar />
           {children}
         </main>
       </body>

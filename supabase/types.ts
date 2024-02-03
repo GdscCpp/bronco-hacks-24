@@ -9,421 +9,149 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      bookmarks: {
+      assignments: {
         Row: {
           created_at: string
           id: number
-          recipe_ids: number[] | null
-          updated_at: string
-          user_id: number
+          name: string | null
+          questions: Json | null
+          value: number | null
         }
         Insert: {
           created_at?: string
           id?: number
-          recipe_ids?: number[] | null
-          updated_at?: string
-          user_id: number
+          name?: string | null
+          questions?: Json | null
+          value?: number | null
         }
         Update: {
           created_at?: string
           id?: number
-          recipe_ids?: number[] | null
-          updated_at?: string
-          user_id?: number
+          name?: string | null
+          questions?: Json | null
+          value?: number | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Bookmarks_userId_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
-      comments: {
+      courses: {
         Row: {
-          comment: string
           created_at: string
           id: number
-          recipe_id: number
-          updated_at: string
-          user_id: number
+          number: string | null
+          title: string | null
         }
         Insert: {
-          comment: string
           created_at?: string
           id?: number
-          recipe_id: number
-          updated_at?: string
-          user_id: number
+          number?: string | null
+          title?: string | null
         }
         Update: {
-          comment?: string
           created_at?: string
           id?: number
-          recipe_id?: number
-          updated_at?: string
-          user_id?: number
+          number?: string | null
+          title?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Comments_recipeId_fkey"
-            columns: ["recipe_id"]
-            isOneToOne: false
-            referencedRelation: "recipes"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "Comments_userId_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
-      ingredients: {
+      messages: {
         Row: {
+          content: Json | null
+          course_id: number | null
           created_at: string
           id: number
-          items: Json
-          recipe_id: number
-          updated_at: string
+          sender_id: number | null
         }
         Insert: {
+          content?: Json | null
+          course_id?: number | null
           created_at?: string
           id?: number
-          items?: Json
-          recipe_id: number
-          updated_at?: string
+          sender_id?: number | null
         }
         Update: {
+          content?: Json | null
+          course_id?: number | null
           created_at?: string
           id?: number
-          items?: Json
-          recipe_id?: number
-          updated_at?: string
+          sender_id?: number | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Ingredients_recipeId_fkey"
-            columns: ["recipe_id"]
-            isOneToOne: false
-            referencedRelation: "recipes"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
-      ratings: {
+      notes: {
         Row: {
+          content: Json | null
           created_at: string
           id: number
-          rating: number
-          recipe_id: number
-          updated_at: string
-          user_id: number
+          owner_id: number | null
         }
         Insert: {
+          content?: Json | null
           created_at?: string
           id?: number
-          rating: number
-          recipe_id: number
-          updated_at?: string
-          user_id: number
+          owner_id?: number | null
         }
         Update: {
+          content?: Json | null
           created_at?: string
           id?: number
-          rating?: number
-          recipe_id?: number
-          updated_at?: string
-          user_id?: number
+          owner_id?: number | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Ratings_recipeId_fkey"
-            columns: ["recipe_id"]
-            isOneToOne: false
-            referencedRelation: "recipes"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "Ratings_userId_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
-      recipe_taste_profiles: {
-        Row: {
-          bitterness: number
-          created_at: string
-          embeddings: string | null
-          id: number
-          recipe_id: number
-          saltiness: number
-          savoriness: number
-          sourness: number
-          spiciness: number
-          sweetness: number
-          updated_at: string
-        }
-        Insert: {
-          bitterness?: number
-          created_at?: string
-          embeddings?: string | null
-          id?: number
-          recipe_id: number
-          saltiness?: number
-          savoriness?: number
-          sourness?: number
-          spiciness?: number
-          sweetness?: number
-          updated_at?: string
-        }
-        Update: {
-          bitterness?: number
-          created_at?: string
-          embeddings?: string | null
-          id?: number
-          recipe_id?: number
-          saltiness?: number
-          savoriness?: number
-          sourness?: number
-          spiciness?: number
-          sweetness?: number
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "RecipeTasteProfiles_recipeId_fkey"
-            columns: ["recipe_id"]
-            isOneToOne: false
-            referencedRelation: "recipes"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      recipes: {
-        Row: {
-          bookmark_count: number
-          comment_count: number
-          commentId: number | null
-          created_at: string
-          date_published: string
-          embeddings: string | null
-          headliner_image: string | null
-          id: number
-          ingredientsId: number | null
-          instructions: Json
-          rating_count: number
-          ratings_id: number | null
-          short_description: string
-          taste_profile_id: number | null
-          title: string
-          updated_at: string
-          user_id: number
-        }
-        Insert: {
-          bookmark_count?: number
-          comment_count?: number
-          commentId?: number | null
-          created_at?: string
-          date_published: string
-          embeddings?: string | null
-          headliner_image?: string | null
-          id?: number
-          ingredientsId?: number | null
-          instructions?: Json
-          rating_count?: number
-          ratings_id?: number | null
-          short_description?: string
-          taste_profile_id?: number | null
-          title: string
-          updated_at?: string
-          user_id: number
-        }
-        Update: {
-          bookmark_count?: number
-          comment_count?: number
-          commentId?: number | null
-          created_at?: string
-          date_published?: string
-          embeddings?: string | null
-          headliner_image?: string | null
-          id?: number
-          ingredientsId?: number | null
-          instructions?: Json
-          rating_count?: number
-          ratings_id?: number | null
-          short_description?: string
-          taste_profile_id?: number | null
-          title?: string
-          updated_at?: string
-          user_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "Recipes_commentId_fkey"
-            columns: ["commentId"]
-            isOneToOne: false
-            referencedRelation: "comments"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "Recipes_ingredientsId_fkey"
-            columns: ["ingredientsId"]
-            isOneToOne: false
-            referencedRelation: "ingredients"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "Recipes_tasteProfileId_fkey"
-            columns: ["taste_profile_id"]
-            isOneToOne: false
-            referencedRelation: "recipe_taste_profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "Recipes_userId_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      tags: {
+      schedules: {
         Row: {
           created_at: string
           id: number
-          name: string
-          recipe_id: number
-          updatedAt: string
+          schedule: Json | null
         }
         Insert: {
           created_at?: string
           id?: number
-          name: string
-          recipe_id: number
-          updatedAt?: string
+          schedule?: Json | null
         }
         Update: {
           created_at?: string
           id?: number
-          name?: string
-          recipe_id?: number
-          updatedAt?: string
+          schedule?: Json | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Tags_recipeId_fkey"
-            columns: ["recipe_id"]
-            isOneToOne: false
-            referencedRelation: "recipes"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      user_taste_profiles: {
-        Row: {
-          bitterness: number
-          created_at: string
-          embeddings: string | null
-          id: number
-          saltiness: number
-          savoriness: number
-          sourness: number
-          spiciness: number
-          sweetness: number
-          updated_at: string
-          user_id: number
-        }
-        Insert: {
-          bitterness?: number
-          created_at?: string
-          embeddings?: string | null
-          id?: number
-          saltiness?: number
-          savoriness?: number
-          sourness?: number
-          spiciness?: number
-          sweetness?: number
-          updated_at?: string
-          user_id: number
-        }
-        Update: {
-          bitterness?: number
-          created_at?: string
-          embeddings?: string | null
-          id?: number
-          saltiness?: number
-          savoriness?: number
-          sourness?: number
-          spiciness?: number
-          sweetness?: number
-          updated_at?: string
-          user_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "UserTasteProfiles_userId_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       users: {
         Row: {
-          authMethod: Database["public"]["Enums"]["auth_method_enum"]
-          created_at: string
-          email: string
-          firstName: string | null
+          course_ids: number[] | null
+          email: string | null
+          first_name: string | null
           id: number
-          lastName: string | null
-          profilePicture: string | null
-          taste_profile_id: number | null
-          updated_at: string
+          last_name: string | null
+          note_ids: number[] | null
+          schedule_id: number | null
+          type: string | null
           uuid: string
         }
         Insert: {
-          authMethod?: Database["public"]["Enums"]["auth_method_enum"]
-          created_at?: string
-          email: string
-          firstName?: string | null
+          course_ids?: number[] | null
+          email?: string | null
+          first_name?: string | null
           id?: number
-          lastName?: string | null
-          profilePicture?: string | null
-          taste_profile_id?: number | null
-          updated_at?: string
+          last_name?: string | null
+          note_ids?: number[] | null
+          schedule_id?: number | null
+          type?: string | null
           uuid: string
         }
         Update: {
-          authMethod?: Database["public"]["Enums"]["auth_method_enum"]
-          created_at?: string
-          email?: string
-          firstName?: string | null
+          course_ids?: number[] | null
+          email?: string | null
+          first_name?: string | null
           id?: number
-          lastName?: string | null
-          profilePicture?: string | null
-          taste_profile_id?: number | null
-          updated_at?: string
+          last_name?: string | null
+          note_ids?: number[] | null
+          schedule_id?: number | null
+          type?: string | null
           uuid?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "Users_tasteProfileId_fkey"
-            columns: ["taste_profile_id"]
-            isOneToOne: false
-            referencedRelation: "user_taste_profiles"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
     }
     Views: {
@@ -433,7 +161,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      auth_method_enum: "traditional" | "google" | "facebook" | "x"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
