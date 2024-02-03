@@ -58,8 +58,8 @@ export default function AssignmentText() {
       </div>
 
       {/* Question */}
-      <div className="flex-grow p-[25px] space-y-[25px]">
-        <p>whats good</p>
+      <div className="flex-grow pt-[10px] space-y-[25px]">
+        <p className="text-xl text-medium">whats good</p>
       </div>
 
       {/* User Input Bar */}
