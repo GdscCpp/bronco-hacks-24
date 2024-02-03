@@ -139,9 +139,9 @@ export default function NotesEditor() {
         <div className="outline-none flex flex-col flex-grow max-w-full bg-white rounded-xl absolute bottom-0 right-0">
           <DropdownMenu>
             <div className="inline-flex text-center justify-center">
-              <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+              <DropdownMenuTrigger>Open | </DropdownMenuTrigger>
               {/** TODO: restyle this */}
-              <button onClick={() => setShowEditor(false)}>Close</button>
+              <button onClick={() => setShowEditor(false)}>{' '}Close</button>
             </div>
             <DropdownMenuContent className={"w-full flex flex-col"}>
               <DropdownMenuLabel>

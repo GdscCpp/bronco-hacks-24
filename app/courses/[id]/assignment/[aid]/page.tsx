@@ -89,7 +89,7 @@ export default function AssignmentText() {
   }, []);
 
   return (
-    <div className="flex-1 h-full bg-primary-900 p-[25px] ml-[15px] rounded-xl space-y-[25px] text-white flex flex-col">
+    <div className="flex-1 h-full w-full bg-primary-900 p-[25px] ml-[15px] rounded-xl space-y-[25px] text-white flex flex-col">
       {/* Header */}
       <div className="flex justify-between items-center p-0 m-0">
         <h1 className="text-center">O</h1>

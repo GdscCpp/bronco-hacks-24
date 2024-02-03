@@ -35,7 +35,7 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body className="h-full w-full bg-black">
         <main className={`h-screen w-full ${showSidebar && "bg-black"} `}>
-          <div className="inline-flex">
+          <div className="inline-flex w-full">
             {showSidebar ? <CoursesSidebar /> : null}
             {children}
           </div>

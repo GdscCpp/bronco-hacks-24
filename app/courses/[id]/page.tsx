@@ -16,10 +16,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faBullhorn, faBook, faMessage, faM } from "@fortawesome/free-solid-svg-icons";
 
 export default function CoursePage({ params }: { params: { id: string } }) {
-
   const supabase = createClient();
   const router = useRouter();
-  
+
   const [course, setCourse] = useState<Course | null>(null);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [tab, setTab] = useState("home");
@@ -29,7 +28,8 @@ export default function CoursePage({ params }: { params: { id: string } }) {
       const result = await supabase
         .from("courses")
         .select("*")
-        .eq("id", params.id).single();
+        .eq("id", params.id)
+        .single();
       setCourse(result.data);
     }
   };
@@ -40,8 +40,14 @@ export default function CoursePage({ params }: { params: { id: string } }) {
         .from("assignments")
         .select("*")
         .eq("course_id", params.id);
-      if(result.data != null)
-        setAssignments(result.data.sort((a, b) => moment(a.due_at).utc().valueOf() - moment(b.due_at).utc().valueOf()) || []);
+      if (result.data != null)
+        setAssignments(
+          result.data.sort(
+            (a, b) =>
+              moment(a.due_at).utc().valueOf() -
+              moment(b.due_at).utc().valueOf()
+          ) || []
+        );
     }
   };
 
@@ -83,8 +89,9 @@ export default function CoursePage({ params }: { params: { id: string } }) {
               at{" "}
               {assignments[0] != null
                 ? moment(assignments[0].due_at).format("hh:mm A")
-                : ""}{" "}
-              &bull; {assignments[0] != null ? assignments[0].value : ""} points
+                : "11:59am"}{" "}
+              &bull; {assignments[0] != null ? assignments[0].value : "100"}{" "}
+              points
             </p>
           </div>
 
@@ -119,37 +126,8 @@ export default function CoursePage({ params }: { params: { id: string } }) {
               setTab("announcements");
             }}
           >
-            <FontAwesomeIcon
-              icon={faBullhorn}
-              className="mr-2"
-            ></FontAwesomeIcon>{" "}
-            Announcements
           </div>
-          <div
-            className={`w-full rounded-xl p-3 mb-[15px] text-white ${
-              tab == "assignments" ? "bg-gray-500" : ""
-            }`}
-            onClick={() => {
-              setTab("assignments");
-            }}
-          >
-            <FontAwesomeIcon icon={faBook} className="mr-2"></FontAwesomeIcon>{" "}
-            Assignments
-          </div>
-          <div
-            className={`w-full rounded-xl p-3 mb-[15px] text-white ${
-              tab == "discussions" ? "bg-gray-500" : ""
-            }`}
-            onClick={() => {
-              setTab("discussions");
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faMessage}
-              className="mr-2"
-            ></FontAwesomeIcon>{" "}
-            Discussions
-          </div>
+    
         </div>
       </div>
 
