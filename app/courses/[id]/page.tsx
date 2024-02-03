@@ -196,7 +196,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
             </div>
           ) : null}
         </div>
-      </div>
+
     </>
   );
 }

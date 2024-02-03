@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import CoursesSidebar from "@/components/courses-sidebar";
+
 import NotesEditor from "@/components/editor";
 import { headers } from "next/headers";
 import { ROUTES } from "@/config/routes";
