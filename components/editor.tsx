@@ -81,7 +81,7 @@ export default function NotesEditor() {
     editorProps: {
       attributes: {
         class:
-          "h-5/6 outline-none flex border-none flex-col flex-grow px-6 overflow-auto container bg-white",
+          "h-5/6 outline-none w-[30px] order-none px-6  bg-white rounded-xl",
       },
     },
     onUpdate({ editor }) {
@@ -136,7 +136,7 @@ export default function NotesEditor() {
   return (
     showEditor && (
       <Draggable>
-        <div className="outline-none flex flex-col flex-grow max-w-full w-1/2 bg-white rounded-xl">
+        <div className="outline-none flex flex-col flex-grow max-w-full bg-white rounded-xl absolute bottom-0 right-0">
           <DropdownMenu>
             <div className="inline-flex text-center justify-center">
               <DropdownMenuTrigger>Open</DropdownMenuTrigger>

@@ -30,13 +30,15 @@ export default function RootLayout({
     "/test"]
   const showSidebar = !SIDEBAR_PATHS.some((route) => pathname === route);
   
-
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="h-full w-full bg-black">
-        <main className={`h-screen w-full ${showSidebar && 'bg-black'} `}>
-        {showSidebar ? <CoursesSidebar /> : null}
-          {children}
+        <main className={`h-screen w-full ${showSidebar && "bg-black"} `}>
+          <div className="inline-flex">
+            {showSidebar ? <CoursesSidebar /> : null}
+            {children}
+          </div>
+
           {showSidebar ? <NotesEditor /> : null}
         </main>
       </body>

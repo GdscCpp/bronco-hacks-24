@@ -87,7 +87,18 @@ export default function CoursePage({ params }: { params: { id: string } }) {
               &bull; {assignments[0] != null ? assignments[0].value : ""} points
             </p>
           </div>
-          <Button className="bg-secondary-500 text-white">Open</Button>
+
+          <Button
+            onClick={() => {
+              router.push(
+                `/courses/${params.id}/assignments/${assignments[0].id || "1"}`
+              );
+            }}
+            className="bg-secondary-500 text-white"
+          >
+            Open
+          </Button>
+
           <hr className="my-[25px]"></hr>
           <div
             className={`w-full rounded-xl p-3 mb-[15px] text-white ${
