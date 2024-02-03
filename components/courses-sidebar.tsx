@@ -57,10 +57,10 @@ export default function CoursesSidebar() {
               <Tooltip>
                 <TooltipTrigger
                   className={
-                    "bg-primary-400 w-fit h-fit p-5 rounded-xl text-white"
+                    "bg-primary-400 w-[80px] h-[80px] p-5 rounded-xl text-white mb-[15px]"
                   }
                 >
-                  {course.number}
+                  {course.number != null ? course.number.substring(0, 4) : "?"}
                 </TooltipTrigger>
                 <TooltipContent className={"text-white"}>{course.title}</TooltipContent>
               </Tooltip>
