@@ -32,6 +32,7 @@ export default function NotesEditor() {
   const router = useRouter();
   const [notes, setNotes] = useState<Notes[]>([]);
   const [activeNote, setActiveNote] = useState<Notes>();
+  const [showEditor, setShowEditor] = useState(true);
 
   const getUser = async () => {
     const { error, data } = await supabase.auth.getUser();
@@ -133,82 +134,92 @@ export default function NotesEditor() {
     "border-none p-2 rounded-xl cursor-pointer bg-gray-800 text-white hover:bg-gray-900 transition duration-200 ease-in-out";
 
   return (
-    <Draggable>
-      <div className="outline-none flex flex-col flex-grow max-w-full w-1/2 bg-white rounded-xl">
-        <DropdownMenu>
-          <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-          <DropdownMenuContent className={"w-full flex flex-col"}>
-            <DropdownMenuLabel>
-              <div className={"w-1/2"}>
-                My Notes<Button onClick={createNote}>+</Button>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <div className={"flex flex-col"}>
-              {notes.map((note, index) => (
-                <DropdownMenuItem key={index}>
-                  <button
-                    onClick={() => {
-                      editor?.commands.setContent(note.content as JSONContent);
-                      setActiveNote(note);
-                    }}
-                  >
-                    {note.created_at}
-                  </button>
-                </DropdownMenuItem>
-              ))}
+    showEditor && (
+      <Draggable>
+        <div className="outline-none flex flex-col flex-grow max-w-full w-1/2 bg-white rounded-xl">
+          <DropdownMenu>
+            <div className="inline-flex text-center justify-center">
+              <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+              {/** TODO: restyle this */}
+              <button onClick={() => setShowEditor(false)}>Close</button>
             </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <div className="flex justify-between items-center border-b p-4 gap-1">
-          <div className="flex gap-2 p-1">
-            <button
-              className={
-                editor?.isActive("bold") ? activeButtonStyle : buttonStyle
-              }
-              onClick={boldToggle}
-            >
-              bold
-            </button>
-            <button
-              className={
-                editor?.isActive("italic") ? activeButtonStyle : buttonStyle
-              }
-              onClick={italicToggle}
-            >
-              italic
-            </button>
-            <button
-              className={
-                editor?.isActive("underline") ? activeButtonStyle : buttonStyle
-              }
-              onClick={underlineToggle}
-            >
-              underline
-            </button>
-            <button
-              className={
-                editor?.isActive("strike") ? activeButtonStyle : buttonStyle
-              }
-              onClick={strikeToggle}
-            >
-              strike
-            </button>
-            <button
-              className={
-                editor?.isActive("code") ? activeButtonStyle : buttonStyle
-              }
-              onClick={codeToggle}
-            >
-              code
-            </button>
+            <DropdownMenuContent className={"w-full flex flex-col"}>
+              <DropdownMenuLabel>
+                <div className={"w-1/2"}>
+                  My Notes<Button onClick={createNote}>+</Button>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <div className={"flex flex-col"}>
+                {notes.map((note, index) => (
+                  <DropdownMenuItem key={index}>
+                    <button
+                      onClick={() => {
+                        editor?.commands.setContent(
+                          note.content as JSONContent
+                        );
+                        setActiveNote(note);
+                      }}
+                    >
+                      {note.created_at}
+                    </button>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <div className="flex justify-between items-center border-b p-4 gap-1">
+            <div className="flex gap-2 p-1">
+              <button
+                className={
+                  editor?.isActive("bold") ? activeButtonStyle : buttonStyle
+                }
+                onClick={boldToggle}
+              >
+                bold
+              </button>
+              <button
+                className={
+                  editor?.isActive("italic") ? activeButtonStyle : buttonStyle
+                }
+                onClick={italicToggle}
+              >
+                italic
+              </button>
+              <button
+                className={
+                  editor?.isActive("underline")
+                    ? activeButtonStyle
+                    : buttonStyle
+                }
+                onClick={underlineToggle}
+              >
+                underline
+              </button>
+              <button
+                className={
+                  editor?.isActive("strike") ? activeButtonStyle : buttonStyle
+                }
+                onClick={strikeToggle}
+              >
+                strike
+              </button>
+              <button
+                className={
+                  editor?.isActive("code") ? activeButtonStyle : buttonStyle
+                }
+                onClick={codeToggle}
+              >
+                code
+              </button>
+            </div>
           </div>
+          <EditorContent
+            editor={editor}
+            className="outline-none flex border-none flex-col flex-grow p-6 overflow-auto"
+          />
         </div>
-        <EditorContent
-          editor={editor}
-          className="outline-none flex border-none flex-col flex-grow p-6 overflow-auto"
-        />
-      </div>
-    </Draggable>
+      </Draggable>
+    )
   );
 }
