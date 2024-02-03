@@ -53,72 +53,138 @@ export default function CoursePage({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="w-[340px] flex flex-col justify-start h-full ml-[15px] w-300 overflow-hidden">
-
-        <div className="w-full h-[260px] mb-[15px] rounded-xl flex flex-col justify-end bg-primary-900 p-[25px]" style={{backgroundImage: `url(${course != null ? course.bg_image : null})`}}>
+        <div
+          className="w-full h-[260px] mb-[15px] rounded-xl flex flex-col justify-end bg-primary-900 p-[25px]"
+          style={{
+            backgroundImage: `url(${course != null ? course.bg_image : null})`,
+          }}
+        >
           <div className="backdrop-blur-sm w-fit p-3 rounded-xl">
-            <h1 className="text-2xl font-black text-white mb-2">{course != null ? course.title : "..."}</h1> 
-            <p className="text-white">{ course != null ? course.number : "..." }</p>
+            <h1 className="text-2xl font-black text-white mb-2">
+              {course != null ? course.title : "..."}
+            </h1>
+            <p className="text-white">
+              {course != null ? course.number : "..."}
+            </p>
           </div>
         </div>
 
         <div className="w-full flex-1 overflow-y-scroll no-scrollbar rounded-xl bg-primary-900 p-[25px]">
-            <p className="text-secondary-500 font-bold">Due Soon</p>
-            <div className="my-[25px]">
-                <h3 className="text-white font-bold">{ assignments[0] != null ? assignments[0].name : "" }</h3>
-                <p className="text-gray-200">Due { assignments[0] != null ? moment(assignments[0].due_at).format('dddd') : "" } at { assignments[0] != null ? moment(assignments[0].due_at).format('hh:mm A') : "" } &bull; { assignments[0] != null ? assignments[0].value : "" } points</p>
-            </div>
-            <Button className="bg-secondary-500 text-white">Open</Button>
-            <hr className="my-[25px]"></hr>
-            <div className={`w-full rounded-xl p-3 mb-[15px] text-white ${(tab == "home" ? "bg-gray-500" : "")}`} onClick={() => {setTab("home")}}>
-              <FontAwesomeIcon icon={faHouse} className="mr-2"></FontAwesomeIcon> Home
-            </div>
-            <div className={`w-full rounded-xl p-3 mb-[15px] text-white ${(tab == "announcements" ? "bg-gray-500" : "")}`} onClick={() => {setTab("announcements")}}>
-            <FontAwesomeIcon icon={faBullhorn} className="mr-2"></FontAwesomeIcon> Announcements
-            </div>
-            <div className={`w-full rounded-xl p-3 mb-[15px] text-white ${(tab == "assignments" ? "bg-gray-500" : "")}`} onClick={() => {setTab("assignments")}}>
-            <FontAwesomeIcon icon={faBook} className="mr-2"></FontAwesomeIcon> Assignments
-            </div>
-            <div className={`w-full rounded-xl p-3 mb-[15px] text-white ${(tab == "discussions" ? "bg-gray-500" : "")}`} onClick={() => {setTab("discussions")}}>
-            <FontAwesomeIcon icon={faMessage} className="mr-2"></FontAwesomeIcon> Discussions
-            </div>
+          <p className="text-secondary-500 font-bold">Due Soon</p>
+          <div className="my-[25px]">
+            <h3 className="text-white font-bold">
+              {assignments[0] != null ? assignments[0].name : ""}
+            </h3>
+            <p className="text-gray-200">
+              Due{" "}
+              {assignments[0] != null
+                ? moment(assignments[0].due_at).format("dddd")
+                : ""}{" "}
+              at{" "}
+              {assignments[0] != null
+                ? moment(assignments[0].due_at).format("hh:mm A")
+                : ""}{" "}
+              &bull; {assignments[0] != null ? assignments[0].value : ""} points
+            </p>
+          </div>
+          <Button className="bg-secondary-500 text-white">Open</Button>
+          <hr className="my-[25px]"></hr>
+          <div
+            className={`w-full rounded-xl p-3 mb-[15px] text-white ${
+              tab == "home" ? "bg-gray-500" : ""
+            }`}
+            onClick={() => {
+              setTab("home");
+            }}
+          >
+            <FontAwesomeIcon icon={faHouse} className="mr-2"></FontAwesomeIcon>{" "}
+            Home
+          </div>
+          <div
+            className={`w-full rounded-xl p-3 mb-[15px] text-white ${
+              tab == "announcements" ? "bg-gray-500" : ""
+            }`}
+            onClick={() => {
+              setTab("announcements");
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faBullhorn}
+              className="mr-2"
+            ></FontAwesomeIcon>{" "}
+            Announcements
+          </div>
+          <div
+            className={`w-full rounded-xl p-3 mb-[15px] text-white ${
+              tab == "assignments" ? "bg-gray-500" : ""
+            }`}
+            onClick={() => {
+              setTab("assignments");
+            }}
+          >
+            <FontAwesomeIcon icon={faBook} className="mr-2"></FontAwesomeIcon>{" "}
+            Assignments
+          </div>
+          <div
+            className={`w-full rounded-xl p-3 mb-[15px] text-white ${
+              tab == "discussions" ? "bg-gray-500" : ""
+            }`}
+            onClick={() => {
+              setTab("discussions");
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faMessage}
+              className="mr-2"
+            ></FontAwesomeIcon>{" "}
+            Discussions
+          </div>
         </div>
-
       </div>
 
       <div className="h-full flex-1 bg-primary-900 p-[25px] ml-[15px] rounded-xl overflow-y-scroll">
         <div className="pb-6">
-          <h1 className="text-4xl font-black text-white mb-2">{course != null ? course.title : "Unknown Course"}</h1>
-          <p className="text-xl text-white">{ course != null ? course.number : "Unknown Section" }</p>
+          <h1 className="text-4xl font-black text-white mb-2">
+            {course != null ? course.title : "Unknown Course"}
+          </h1>
+          <p className="text-xl text-white">
+            {course != null ? course.number : "Unknown Section"}
+          </p>
         </div>
         <CourseDetails {...data} />
-      <div className="flex-1 overflow-y-scroll no-scrollbar bg-primary-900 p-[25px] ml-[15px] rounded-xl">
-
-        { (tab == "home") ? (
-          <div>
-            <h1 className="text-white font-bold text-4xl">Home</h1>
-          </div>
-        ) : (tab == "announcements") ? (
-          <div>
-            <h1 className="text-white font-bold text-4xl">Announcements</h1>
-          </div>
-        ) : (tab == "assignments") ? (
-          <div>
-            <h1 className="text-white font-bold text-4xl mb-5">Assignments</h1>
-            {assignments.map((assignment) => {
-              return (
-                <div className="w-full p-3 text-white bg-primary-400 rounded-xl mb-5">
-                  <h3 className="font-bold text-lg">{assignment.name}</h3>
-                  <p className="text-gray-200">Due { moment(assignment.due_at).format('dddd') } at { moment(assignment.due_at).format('hh:mm A') } &bull; { assignment.value } points</p>
-                </div>
-              );
-            })}
-          </div>
-        ) : (tab == "discussions") ? (
-          <div>
-            <h1 className="text-white font-bold text-4xl">Discussions</h1>
-          </div>
-        ) : null } 
-
+        <div className="flex-1 overflow-y-scroll no-scrollbar bg-primary-900 p-[25px] ml-[15px] rounded-xl">
+          {tab == "home" ? (
+            <div>
+              <h1 className="text-white font-bold text-4xl">Home</h1>
+            </div>
+          ) : tab == "announcements" ? (
+            <div>
+              <h1 className="text-white font-bold text-4xl">Announcements</h1>
+            </div>
+          ) : tab == "assignments" ? (
+            <div>
+              <h1 className="text-white font-bold text-4xl mb-5">
+                Assignments
+              </h1>
+              {assignments.map((assignment) => {
+                return (
+                  <div className="w-full p-3 text-white bg-primary-400 rounded-xl mb-5">
+                    <h3 className="font-bold text-lg">{assignment.name}</h3>
+                    <p className="text-gray-200">
+                      Due {moment(assignment.due_at).format("dddd")} at{" "}
+                      {moment(assignment.due_at).format("hh:mm A")} &bull;{" "}
+                      {assignment.value} points
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          ) : tab == "discussions" ? (
+            <div>
+              <h1 className="text-white font-bold text-4xl">Discussions</h1>
+            </div>
+          ) : null}
+        </div>
       </div>
     </>
   );

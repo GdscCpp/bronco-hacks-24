@@ -9,3 +9,4 @@ export type Course = Tables["courses"]["Row"];
 export type Notes = Tables["notes"]["Row"];
 
 export type Annoucements = Tables["annoucements"]["Row"];
+export type Assignment = Tables["assignments"]["Row"];
