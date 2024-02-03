@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import CoursesSidebar from "@/components/courses-sidebar";
+import NotesEditor from "@/components/editor";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -23,6 +24,7 @@ export default function RootLayout({
         <main className="h-screen w-full bg-black">
           <CoursesSidebar />
           {children}
+            <NotesEditor />
         </main>
       </body>
     </html>
