@@ -6,6 +6,10 @@ import { createClient } from "@/utils/supabase/client";
 import { Course, Assignment } from "@/supabase/helper";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CourseDetails, CourseData } from "@/components/course-details";
+import courseData from "@/utils/mockdata.json";
+
+const data: CourseData = courseData[0];
 
 export default function CoursePage({ params }: { params: { id: string } }) {
 
@@ -44,7 +48,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="w-[340px] flex flex-col justify-start h-ful ml-[15px] w-300">
+      <div className="w-[340px] flex flex-col justify-start h-full ml-[15px] w-300 overflow-hidden">
 
         <div className="w-full h-[260px] mb-[15px] rounded-xl flex flex-col justify-end bg-primary-900 p-[25px]">
             <h1 className="text-2xl font-black text-white mb-2">{course != null ? course.title : "Unknown Course"}</h1>
@@ -75,10 +79,13 @@ export default function CoursePage({ params }: { params: { id: string } }) {
 
       </div>
 
-      <div className="flex-1 bg-primary-900 p-[25px] ml-[15px] rounded-xl">
-  
+      <div className="h-full flex-1 bg-primary-900 p-[25px] ml-[15px] rounded-xl overflow-y-scroll">
+        <div className="pb-6">
+          <h1 className="text-4xl font-black text-white mb-2">{course != null ? course.title : "Unknown Course"}</h1>
+          <p className="text-xl text-white">{ course != null ? course.number : "Unknown Section" }</p>
+        </div>
+        <CourseDetails {...data} />
       </div>
-
     </>
   );
 }
