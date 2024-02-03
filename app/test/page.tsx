@@ -40,7 +40,7 @@ export default function AssignmentBot() {
   return (
     <div className="bg-primary-900 h-full w-full">
       <div className="w-full">
-        {messages.map((message) =>
+        {messages.slice(1).map((message) =>
           message.role === "user" ? (
             <div className="inline-flex w-full">
               <div className="w-3/4"></div>
@@ -67,6 +67,11 @@ export default function AssignmentBot() {
           onChange={(e) => setInput(e.target.value)}
           value={input}
           className="w-full bg-primary-900 text-white"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleClick();
+            }
+          }}
         />
         <button
           className="bg-secondary-500 border-none text-white font-bold py-2 px-4"
