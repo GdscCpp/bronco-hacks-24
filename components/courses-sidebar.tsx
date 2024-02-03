@@ -49,7 +49,7 @@ export default function CoursesSidebar() {
   }, []);
 
   return (
-    <div className="w-fit flex h-full bg-primary-900 rounded-lg p-4 m-4">
+    <div className="w-fit flex h-full bg-primary-900 rounded-xl p-4">
       {courses.map((course) => {
         return (
           <>
