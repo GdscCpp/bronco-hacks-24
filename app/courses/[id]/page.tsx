@@ -91,7 +91,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
           <Button
             onClick={() => {
               router.push(
-                `/courses/${params.id}/assignments/${assignments[0].id || "1"}`
+                `/courses/${params.id}/assignment/${assignments[0].id || "1"}`
               );
             }}
             className="bg-secondary-500 text-white"
@@ -196,7 +196,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
             </div>
           ) : null}
         </div>
-
+      </div>
     </>
   );
 }

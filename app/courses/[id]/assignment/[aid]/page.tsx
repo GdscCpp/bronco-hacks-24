@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 "use client";
 
 import { ROUTES } from "@/config/routes";
@@ -13,7 +15,13 @@ import { useParams, useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import moment from "moment";
 import ChatbotContainer from "@/components/chatbot/chatbot-container";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function AssignmentText() {
   const supabase = createClient();
@@ -61,9 +69,9 @@ export default function AssignmentText() {
   const checkAnswer = () => {
     // Check the user's answer
     if (userInput === assignment?.questions[activeQuestion].correctAnswer) {
-      if(activeQuestion + 1 === assignment?.questions.length) {
+      if (activeQuestion + 1 === assignment?.questions.length) {
         // Last question
-        return router.push(`${ROUTES.COURSES}/${params.id}/`)
+        return router.push(`${ROUTES.COURSES}/${params.id}/`);
       }
       // Correct
       setActiveQuestion(activeQuestion + 1);
@@ -132,19 +140,14 @@ export default function AssignmentText() {
           ))}
         {error && <p className="text-red-500">{error}</p>}
       </div>
-   
+
       {assignment && (
         <Dialog>
           <DialogTrigger>Ask a question</DialogTrigger>
-          
-              <ChatbotContainer assignment={assignment} />
-    
+
+          <ChatbotContainer assignment={assignment} />
         </Dialog>
       )}
-            
-
-
-       
 
       {/* User Input Bar */}
       <div
