@@ -10,7 +10,8 @@ import {
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import moment from "moment";
 
 export default function AssignmentText() {
   const supabase = createClient();
@@ -19,6 +20,8 @@ export default function AssignmentText() {
   const params = useParams();
   const [assignment, setAssignment] = useState<Assignment>();
   const [activeQuestion, setActiveQuestion] = useState(0);
+  const [error, setError] = useState("");
+  const [userInput, setUserInput] = useState("");
 
   const getUser = async () => {
     const { error, data } = await supabase.auth.getUser();
@@ -53,7 +56,23 @@ export default function AssignmentText() {
     setAssignment(assignments.data!);
   };
 
-  const [userInput, setUserInput] = useState("");
+  const checkAnswer = () => {
+    // Check the user's answer
+    if (userInput === assignment?.questions[activeQuestion].correctAnswer) {
+      if(activeQuestion + 1 === assignment?.questions.length) {
+        // Last question
+        return router.push(`${ROUTES.COURSES}/${params.id}/`)
+      }
+      // Correct
+      setActiveQuestion(activeQuestion + 1);
+      setError("");
+      setUserInput("");
+    } else {
+      // Incorrect
+
+      setError("Incorrect answer. Please try again.");
+    }
+  };
 
   useEffect(() => {
     getAssignment();
@@ -74,28 +93,42 @@ export default function AssignmentText() {
         <div className="w-full bg-primary-700 h-[10px] p-0 m-0 rounded-[5px]">
           <div
             className="bg-secondary-500 h-full rounded-[5px]"
-            style={{ width: "33%" }}
+            style={{
+              width: `${
+                ((activeQuestion + 1) / assignment?.questions.length) * 100
+              }%`,
+            }}
           ></div>
         </div>
         {/* Progress Bar Text */}
         <div className="flex justify-between items-center w-full">
-          <p className="text-left text-base">Question 1/3</p>
+          <p className="text-left text-base">
+            Question {activeQuestion + 1} / {assignment?.questions.length}
+          </p>
           <p className="text-right text-gray-500 text-base font-light">
-            {assignment?.due_at}
+            Due: {moment(assignment?.due_at).format("h:mm a")}
           </p>
         </div>
       </div>
 
       {/* Question */}
       <div className="flex-grow pt-[10px] space-y-[25px]">
-        <p className="font-bold">{assignment?.questions[0].text}</p>
-        {assignment?.questions[0].options.map((answer, index) => (
-          <div key={index} className="flex items-center">
-            <ul>
-              <li>{answer}</li>
-            </ul>
-          </div>
-        ))}
+        {assignment?.questions[activeQuestion].type === "trueFalse" && (
+          <p>Answer true/false</p>
+        )}
+        <p className="font-bold">
+          {assignment?.questions[activeQuestion].text}
+        </p>
+
+        {assignment?.questions[activeQuestion].options &&
+          assignment.questions[activeQuestion].options.map((answer, index) => (
+            <div key={index} className="flex items-center">
+              <ul>
+                <li>{answer}</li>
+              </ul>
+            </div>
+          ))}
+        {error && <p className="text-red-500">{error}</p>}
       </div>
 
       {/* User Input Bar */}
@@ -104,7 +137,16 @@ export default function AssignmentText() {
         className="h-[50px] rounded-[10px]"
       >
         {/* Input elements go here */}
-        <input className="w-full" />
+        <input
+          onChange={(e) => setUserInput(e.target.value)}
+          value={userInput}
+          className="w-full h-full rounded-xl bg-primary-900 px-2"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              checkAnswer();
+            }
+          }}
+        />
       </div>
     </div>
   );
