@@ -45,26 +45,23 @@ export default function SignInPage() {
     router.push(ROUTES.HOME);
   };
 
-  return (
-    <>
-      <Card className="flex overflow-hidden out bg-white">
-        <div className="w-1/2">
-          <img
-            src="/signup.png"
-            alt="background"
-            className={"object-cover rounded-r-none rounded-xl"}
-          />
-        </div>
-        <div className="w-1/2 bg-white">
-          <CardHeader>
-            <h1 className={"text-5xl text-secondary-500"}>ClassHub</h1>
-            <h2 className={"text-2xl text-black pt-5"}>
-              Nice to see you again
-            </h2>
-          </CardHeader>
-          <CardContent className="text-black">
+  return(
+    <div className="flex flex-row bg-white rounded-3xl overflow-clip shadow-xl">
+      {/* Cover Image */}
+      <div className="w-1/2 overflow-hidden flex-grow">
+        <img
+          src="/signup.png"
+          alt="background"
+          className="object-cover w-full h-full scale-105"
+        />
+      </div>
+      {/* Sign In Container */}
+      <div className="w-1/2 flex justify-center items-center p-[48px]">
+        <div className="flex w-full h-full flex-col space-y-[32px]">
+          <h1 className="text-5xl text-secondary-500 font-extrabold">ClassHub</h1>
+          <div className="flex-col">
             <FormProvider {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-[16px]">
                 <FormInput
                   name="email"
                   label="Email"
@@ -77,7 +74,7 @@ export default function SignInPage() {
                   placeholder="Enter your password"
                 />
 
-                <Button className="mt-2" type="submit">
+                <Button className="" type="submit">
                   Sign in
                 </Button>
               </form>
@@ -86,9 +83,14 @@ export default function SignInPage() {
             {submissionError && (
               <div className="mt-2 text-red-500">{submissionError}</div>
             )}
-          </CardContent>
+          </div>
+          {/* Sign Up Offer */}
+          <div className="flex items-center justify-center space-x-[10px]">
+            <p className="text-gray-500 font-light text-sm">Already have an account?</p>
+            <a href="/auth/signup" className="text-blue-500 underline font-medium text-sm">Sign in now</a>
+          </div>
         </div>
-      </Card>
-    </>
+      </div>
+    </div>
   );
 }
