@@ -12,12 +12,14 @@ interface FormInputProps {
   name: string;
   label: string;
   placeholder: string;
+  className?: string;
 }
 
 export default function FormInput({
   name,
   label,
   placeholder,
+  className,
 }: FormInputProps) {
   const form = useFormContext();
 
@@ -30,7 +32,7 @@ export default function FormInput({
           <FormItem>
             <FormLabel>{label}</FormLabel>
             <FormControl>
-              <Input placeholder={placeholder} {...field} />
+              <Input className={className}  placeholder={placeholder} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

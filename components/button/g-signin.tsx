@@ -3,6 +3,7 @@
 import { BASE_URL } from "@/config/constants";
 import { API_ROUTES } from "@/config/routes";
 import { createClient } from "@/utils/supabase/client";
+import { Button } from "../ui/button";
 
 export interface GoogleSignInButtonProps {
   isSignUp?: boolean;
@@ -22,11 +23,11 @@ export default function GoogleSignInButton({
   };
 
   return (
-    <button
+    <Button
       onClick={signInWithGoogle}
-      className="flex items-center justify-center px-4 py-2 font-semibold text-black p-2 rounded cursor-pointer border-2 border-gray-200 hover:opacity-70 active:bg-gray-200"
+      className="flex items-center justify-center px-4 py-2 font-semibold mt-4 rounded-lg bg-black text-white p-2 cursor-pointer border-2 border-gray-200 hover:opacity-70 active:bg-gray-200"
     >
       Continue with Google
-    </button>
+    </Button>
   );
 }
