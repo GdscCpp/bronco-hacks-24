@@ -34,11 +34,10 @@ export default function couseHome() {
     const user = await getUser();
     const courseIds = user.course_ids;
 
-    if (courseIds && courseIds) {
       const courses = await supabase.from("courses").select("*");
 
       setCourses(courses.data || []);
-    }
+    
   };
 
   const getAssignments = async () => {

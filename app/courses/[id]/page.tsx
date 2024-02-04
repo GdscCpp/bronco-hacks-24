@@ -28,7 +28,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
       const result = await supabase
         .from("courses")
         .select("*")
-        .eq("id", params.id)
         .single();
       setCourse(result.data);
     }
