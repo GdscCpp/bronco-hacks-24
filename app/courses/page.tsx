@@ -34,28 +34,23 @@ export default function couseHome() {
     const user = await getUser();
     const courseIds = user.course_ids;
 
-      const courses = await supabase.from("courses").select("*");
+    const courses = await supabase.from("courses").select("*");
 
-      setCourses(courses.data || []);
-    
+    setCourses(courses.data || []);
   };
 
   const getAssignments = async () => {
     const user = await getUser();
-    const courseIds = user.course_ids;
 
-    if (courseIds && courseIds) {
-      const result = await supabase.from("assignments").select("*");
+    const result = await supabase.from("assignments").select("*");
 
-      if (result.data != null)
-        setAssignments(
-          result.data.sort(
-            (a, b) =>
-              moment(a.due_at).utc().valueOf() -
-              moment(b.due_at).utc().valueOf()
-          ) || []
-        );
-    }
+    if (result.data != null)
+      setAssignments(
+        result.data.sort(
+          (a, b) =>
+            moment(a.due_at).utc().valueOf() - moment(b.due_at).utc().valueOf()
+        ) || []
+      );
   };
 
   useEffect(() => {
