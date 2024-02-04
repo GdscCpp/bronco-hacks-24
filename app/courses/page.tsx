@@ -32,7 +32,6 @@ export default function couseHome() {
 
   const getCourses = async () => {
     const user = await getUser();
-    const courseIds = user.course_ids;
 
     const courses = await supabase.from("courses").select("*");
 

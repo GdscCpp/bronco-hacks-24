@@ -82,7 +82,7 @@ export default function SignInPage() {
                 </Button>
               </form>
             </FormProvider>
-            <GoogleSignInButton isSignUp={false} />
+            <GoogleSignInButton isSignUp/>
             {submissionError && (
               <div className="mt-2 text-red-500">{submissionError}</div>
             )}

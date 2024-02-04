@@ -50,11 +50,10 @@ export default function NotesEditor() {
   };
 
   const getNotes = async () => {
-    const user = await getUser();
     const notes = await supabase
       .from("notes")
       .select("*")
-      .eq("owner_id", user.id);
+      .eq("owner_id", 1);
 
     return setNotes(notes.data || []);
   };

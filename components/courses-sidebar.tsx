@@ -28,7 +28,6 @@ export default function CoursesSidebar() {
     const user = await supabase
       .from("users")
       .select("*")
-      .eq("uuid", data.user?.id!)
       .single();
 
     return user.data!;
@@ -36,15 +35,13 @@ export default function CoursesSidebar() {
 
   const getCourses = async () => {
     const user = await getUser();
-    const courseIds = user.course_ids;
 
-    if (courseIds && courseIds) {
       const courses = await supabase
         .from("courses")
         .select("*")
-        .in("id", courseIds);
+     
       setCourses(courses.data || []);
-    }
+    
   };
   useEffect(() => {
     getCourses();
