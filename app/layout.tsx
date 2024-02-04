@@ -26,9 +26,7 @@ export default function RootLayout({
   console.log(pathname);
   const SIDEBAR_PATHS = [
     ROUTES.SIGN_IN,
-    ROUTES.SIGN_UP,
-    "/annoucement-placeholder",
-    "/test"]
+    ROUTES.SIGN_UP]
   const showSidebar = !SIDEBAR_PATHS.some((route) => pathname === route);
   
   return (

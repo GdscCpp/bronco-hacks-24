@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://bronco-hacks-24.vercel.app'
+export const BASE_URL = `https://${process.env.VERCEL_URL}` || "localhost:3000";

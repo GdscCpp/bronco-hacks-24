@@ -44,7 +44,7 @@ const ChatbotContainer = ({ assignment }: ChatbotContainerProps) => {
   };
 
   return (
-    <DialogContent className="flex flex-col h-full p-[25px] space-y-[25px] bg-primary-900 border-solid border-2 border-gray-500 text-white rounded-[25px]">
+    <DialogContent className="flex flex-col h-full p-[25px] space-y-[25px] bg-primary-900 border-solid border-2 border-gray-500 text-white rounded-[25px] overflow-scroll-y">
       <DialogHeader>
         <DialogTitle>ClassBot</DialogTitle>
       </DialogHeader>
