@@ -1,9 +1,14 @@
-import { cookies } from "next/headers";
+"use client";
+
+import { ROUTES } from "@/config/routes";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default async function Index() {
-  const cookieStore = cookies();
-  
-  return (
-   <></>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push(ROUTES.HOME);
+  }, []);
+  return <></>;
 }
